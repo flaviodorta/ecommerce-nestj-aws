@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib/core';
-import { EcommerceNestjsAwsEcsFargateCdkStack } from '../lib/ecommerce-nestjs-aws-ecs-fargate-cdk-stack';
 import { EcrStack } from '../lib/ecr-stack';
+import { VpcStack } from '../lib/vpc-stack';
 
 const app = new cdk.App();
 
@@ -18,4 +18,9 @@ const env: cdk.Environment = {
 const newStack = new EcrStack(app, 'Ecr', {
   tags: tagsInfra,
   env: env,
+});
+
+const vpcStack = new VpcStack(app, 'Vpc', {
+  env: env,
+  tags: tagsInfra,
 });

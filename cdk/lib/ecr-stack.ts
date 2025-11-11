@@ -12,9 +12,9 @@ export class EcrStack extends cdk.Stack {
       'ProductsService',
       {
         repositoryName: 'ecommerce-products-service',
-        imageTagMutability: ecr.TagMutability.IMMUTABLE,,
+        imageTagMutability: ecr.TagMutability.IMMUTABLE,
         emptyOnDelete: true,
-        removalPolicy: cdk.RemovalPolicy.DESTROY
+        removalPolicy: cdk.RemovalPolicy.DESTROY,
       }
     );
   }
