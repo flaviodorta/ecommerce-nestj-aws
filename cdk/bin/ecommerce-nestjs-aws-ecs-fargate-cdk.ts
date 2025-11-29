@@ -2,6 +2,8 @@
 import * as cdk from 'aws-cdk-lib/core';
 import { EcrStack } from '../lib/ecr-stack';
 import { VpcStack } from '../lib/vpc-stack';
+import { ClusterStack } from '../lib/cluster-stack';
+import { LoadBalancerStack } from '../lib/lb-stack';
 
 const app = new cdk.App();
 
@@ -24,3 +26,19 @@ const vpcStack = new VpcStack(app, 'Vpc', {
   env: env,
   tags: tagsInfra,
 });
+
+const lbStack = new LoadBalancerStack(app, 'LoadBalancer', {
+  vpc: vpcStack.vpc,
+  env: env,
+  tags: tagsInfra,
+});
+
+lbStack.addDependency(vpcStack);
+
+const clustStack = new ClusterStack(app, 'Cluster', {
+  vpc: vpcStack.vpc,
+  env: env,
+  tags: tagsInfra,
+});
+
+clustStack.addDependency(vpcStack);
